@@ -1,9 +1,7 @@
-tfaBot:
-  # Required bot url
-  # config:
-  #   botUrl: https://url.to.google.sheet.conf
-  config: {}
+# Required!
+# botUrl: https://url.to.google.sheet.conf
 
+docker:
   # Docker image repository
   image: bedrocksolutions/tfa-bot
 
@@ -13,14 +11,12 @@ tfaBot:
   # Docker image pull policy
   pullPolicy: Always
 
-  # Container resource limits and requests
-  resources:
-    limits:
-      cpu: 100m
-      memory: 256Mi
-    requests:
-      cpu: 50m
-      memory: 96Mi
+# Container resource limits and requests
+resources:
+  cpuLimit: 100m
+  cpuRequested: 50m
+  memoryLimit: 256Mi
+  memoryRequested: 96Mi
 
 deployment:
   replicas: 1
