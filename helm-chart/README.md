@@ -50,7 +50,7 @@ their default values.
 
 | Parameter                          | Description                              | Default                    |
 | ---------------------------------- | ---------------------------------------- | -------------------------- |
-| `botUrl`                           | URL to config document (see below)       | `{}`                       |
+| `botUrl`                           | URL to config document (see below)       | none                      |
 | `deployment.replicas`              | desired number of tfa-bot replicas       | `1`                        |
 | `deployment.restartPolicy`         | pod restart policy                       | `Always`                   |
 | `docker.image`                     | docker image repository                  | `bedrocksolutions/tfa-bot` |
@@ -63,7 +63,7 @@ their default values.
 
 ### Bot URL
 
-The only required configuration is a URL to the Google Sheet configuration document.
+The only required configuration parameter is a URL to the Google Sheet configuration document.
 
 | Configuration | Description                                                                                                                                    |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -74,7 +74,5 @@ The only required configuration is a URL to the Google Sheet configuration docum
 Create a values override file with the URL to the configuration document:
 
 ```yaml
-tfa-bot:
-  config:
-    botUrl: https://url.to.google.sheets.conf
+botUrl: https://url.to.google.sheets.conf
 ```
