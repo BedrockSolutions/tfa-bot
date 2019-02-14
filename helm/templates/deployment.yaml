@@ -1,0 +1,51 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  name: {{ template "app.fullname" . }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "app.name" . }}
+    spec:
+      containers:
+        - name: {{ template "app.name" . }}
+          env:
+            - name: BOTURL
+              value: {{ .Values.botUrl | quote }}
+          image: {{ .Values.docker.image }}:{{ .Values.docker.imageTag }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - mono
+              initialDelaySeconds: 60
+              timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - mono
+              initialDelaySeconds: 5
+              timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: {{ .Values.resources.cpuLimit }}
+              memory: {{ .Values.resources.memoryLimit }}
+            requests:
+              cpu: {{ .Values.resources.cpuRequested }}
+              memory: {{ .Values.resources.memoryRequested }}
+      restartPolicy: {{ .Values.deployment.restartPolicy }}
+      terminationGracePeriodSeconds: 5
+...
