@@ -1,6 +1,10 @@
 # Required!
 # botUrl: https://url.to.google.sheet.conf
 
+deployment:
+  replicas: 1
+  restartPolicy: Always
+
 docker:
   # Docker image repository
   image: bedrocksolutions/tfa-bot
@@ -17,7 +21,3 @@ resources:
   cpuRequested: 50m
   memoryLimit: 256Mi
   memoryRequested: 96Mi
-
-deployment:
-  replicas: 1
-  restartPolicy: Always
