@@ -3,23 +3,26 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: {{ template "app.name" . }}
-    chart: {{ template "app.chart" . }}
+    app: {{ include "app.name" . }}
+    chart: {{ include "app.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-  name: {{ template "app.fullname" . }}
+  name: {{ include "app.fullname" . }}
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: {{ template "app.name" . }}
+      app: {{ include "app.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "app.name" . }}
+        app: {{ include "app.name" . }}
+        chart: {{ include "app.chart" . }}
+        release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ template "app.name" . }}
+        - name: {{ include "app.name" . }}
           env:
             - name: BOTURL
               value: {{ .Values.botUrl | quote }}
