@@ -1,6 +1,6 @@
 # tfa-bot
 
-This repository contains a Dockerfile and Helm chart for TFA's monitoring bot.
+Helm chart for TFA's monitoring bot.
 
 The [Factoid Authority Bot](https://git.factoid.org/TFA/TFA-Bot) provides monitoring 
 and alerting of [Factom®](https://www.factomprotocol.org/) nodes.
@@ -55,7 +55,7 @@ helm delete --purge `tfa-bot`
 The command removes all the Kubernetes components associated with the chart and deletes 
 the release.
 
-## Configuration
+### Configuration
 
 The following table lists the configurable parameters of the tfa-bot chart and 
 their default values.
